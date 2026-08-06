@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
-VERSION = "0.2.0-rc1"
+VERSION = "0.2.0-rc4"
 ARCHIVE = DIST / f"codex-calm-starter-v{VERSION}.zip"
 PREFIX = "codex-calm-starter/"
 

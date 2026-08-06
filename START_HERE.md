@@ -22,6 +22,13 @@ Open the entire Starter folder in Codex again and type:
 
 You will receive one plain-language cause and one recovery action.
 
+If macOS asks to install developer tools, cancel that prompt. The Starter must
+be checked inside Codex without Terminal, Python, or system installers.
+
+If answers look too shallow and the bottom model selector shows
+`5.6 Sol Light`, choose regular `5.6 Sol` for serious work when available. The
+Starter cannot change the owner's model selection.
+
 ## Important
 
 - Use your own OpenAI account.

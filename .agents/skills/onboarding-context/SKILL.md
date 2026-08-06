@@ -10,11 +10,14 @@ description: Start a beginner's first Codex session when they type "НАЧАТЬ
 1. Respond in the person's language.
 2. Use this repository-local skill path. Do not search for or require a copy
    under `~/.codex/skills` or `~/.agents/skills`.
-3. Run `python3 .agents/skills/onboarding-context/scripts/preflight.py` when
-   Python is available. If it is unavailable, perform the same read-only checks
-   directly and explain one recovery action per failed check.
-4. Show only the plain-language summary. Keep technical details in
-   `PREFLIGHT_TECHNICAL.json`.
+3. Use runtime evidence already available in the conversation:
+   - Codex is running because it is replying;
+   - the Starter project is open because this skill and `AGENTS.md` are active;
+   - the core is ready when `onboarding-context`, `privacy-permissions`,
+     `problem-solving-loop`, and `numbered-navigation` are available.
+4. Show a four-line plain-language readiness summary. Do not read or create
+   diagnostic files, open Terminal, run Python, run Git, or request developer
+   tools. `PREFLIGHT_MANIFEST.json` is for maintainers and optional support.
 5. Ask no more than five questions, one at a time:
    - preferred name;
    - language;
@@ -39,3 +42,5 @@ description: Start a beginner's first Codex session when they type "НАЧАТЬ
 - Prefer a reversible local preview.
 - Never treat missing Git, terminal knowledge, or coding experience as failure.
 - If something fails, give exactly one recovery action before offering alternatives.
+- A macOS prompt to install developer tools is not part of onboarding. Tell the
+  person to cancel it and continue in Codex.

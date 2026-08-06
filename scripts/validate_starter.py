@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILLS = {
     "onboarding-context",
     "privacy-permissions",
-    "problem-os-lite",
+    "problem-solving-loop",
     "numbered-navigation",
     "website-helper",
     "email-helper",
@@ -22,7 +22,7 @@ SKILLS = {
 CORE = {
     "onboarding-context",
     "privacy-permissions",
-    "problem-os-lite",
+    "problem-solving-loop",
     "numbered-navigation",
 }
 PRIVATE_LOCAL = {
@@ -41,6 +41,7 @@ REQUIRED = {
     "AGENTS.md",
     "ABOUT_ME.template.md",
     "MY_PROGRESS.template.md",
+    "PREFLIGHT_MANIFEST.json",
     "НАЧАТЬ_ЗДЕСЬ.md",
     "START_HERE.md",
     "PRIVACY.md",
@@ -49,8 +50,8 @@ REQUIRED = {
     "SITE_TRUST_BLOCK.md",
     "CREDITS.template.md",
     ".gitignore",
-    ".agents/skills/onboarding-context/scripts/preflight.py",
-    ".agents/skills/support-checkin/scripts/build_preview.py",
+    "scripts/support_preflight.py",
+    "scripts/support_build_preview.py",
     "scripts/smoke_test.py",
     "scripts/build_release.py",
 }
@@ -111,7 +112,13 @@ for private_name in PRIVATE_LOCAL:
         print(f"NOTE: local private file exists and must remain untracked: {private_name}")
 
 for path in ROOT.rglob("*"):
-    if not path.is_file() or ".git" in path.parts or path.suffix not in TEXT_SUFFIXES:
+    relative_parts = path.relative_to(ROOT).parts
+    if (
+        not path.is_file()
+        or ".git" in path.parts
+        or (relative_parts and relative_parts[0] == "site")
+        or path.suffix not in TEXT_SUFFIXES
+    ):
         continue
     text = path.read_text(encoding="utf-8", errors="replace")
     for label, pattern in SECRET_PATTERNS.items():
@@ -119,8 +126,8 @@ for path in ROOT.rglob("*"):
             fail(f"possible {label} in {path.relative_to(ROOT)}")
 
 for relative in (
-    ".agents/skills/onboarding-context/scripts/preflight.py",
-    ".agents/skills/support-checkin/scripts/build_preview.py",
+    "scripts/support_preflight.py",
+    "scripts/support_build_preview.py",
 ):
     text = (ROOT / relative).read_text(encoding="utf-8")
     if any(marker in text for marker in NETWORK_MARKERS):
@@ -131,9 +138,44 @@ onboarding_text = (
 ).read_text(encoding="utf-8")
 if "~/.codex/skills" not in onboarding_text or "Do not search" not in onboarding_text:
     fail("onboarding must forbid dependency on a global skill copy")
+if "open terminal" not in onboarding_text.lower() or "run python" not in onboarding_text.lower():
+    fail("beginner onboarding must explicitly forbid Terminal and Python")
+if "Use runtime evidence already available" not in onboarding_text:
+    fail("beginner onboarding must use runtime evidence")
+if "do not read or create diagnostic files" not in " ".join(
+    onboarding_text.lower().split()
+):
+    fail("beginner onboarding still depends on diagnostic file access")
+
+client_files = (
+    ROOT / "AGENTS.md",
+    ROOT / ".agents/skills/onboarding-context/SKILL.md",
+    ROOT / ".agents/skills/support-checkin/SKILL.md",
+    ROOT / "START_HERE.md",
+    ROOT / "НАЧАТЬ_ЗДЕСЬ.md",
+)
+for path in client_files:
+    text = path.read_text(encoding="utf-8")
+    if "python3 " in text:
+        fail(f"client path invokes Python: {path.relative_to(ROOT)}")
+
+agents_text = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+if "Run the complete `problem-solving-loop` automatically" not in agents_text:
+    fail("complete Problem Solving Loop is not mandatory")
+if "End every non-trivial result with short numbered choices" not in agents_text:
+    fail("numbered navigation is not mandatory for non-trivial results")
+if "Do not configure a bridge" not in agents_text:
+    fail("local-only no-bridge boundary is missing")
+
+loop_text = (
+    ROOT / ".agents/skills/problem-solving-loop/SKILL.md"
+).read_text(encoding="utf-8")
+for phase in ("Outcome", "Facts", "Boundary", "Small plan", "Do", "Verify", "Continue"):
+    if f"**{phase}**" not in loop_text:
+        fail(f"Problem Solving Loop phase is missing: {phase}")
 
 print(
-    "PASS: Starter has 4 core skills, 3 optional modules, "
-    "1 opt-in support skill, and public-safe defaults"
+    "PASS: Starter has the complete Problem Solving Loop, mandatory numbered "
+    "navigation, 3 optional work modules, opt-in support, and no bridge"
 )
 sys.exit(0)

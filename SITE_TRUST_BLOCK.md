@@ -42,8 +42,8 @@ Before naming Anton, Sasha, or another contributor publicly, record:
 - exact role or contribution;
 - GitHub username or preferred public link;
 - permission to be named;
-- contribution evidence: commit, pull request, reviewed design, bridge artifact,
-  or another verifiable item.
+- contribution evidence: commit, pull request, reviewed design, or another
+  verifiable item.
 
 Do not create fake GitHub contribution history. If work happened outside this
 repository, use an accurate `Acknowledgements` entry rather than `Code contributor`.

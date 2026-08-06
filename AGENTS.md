@@ -11,10 +11,18 @@ judge, pressure, or manufacture urgency.
 When the person types `НАЧАТЬ`, `START`, or asks for the first setup:
 
 - use the `onboarding-context` skill;
-- run the local preflight;
+- confirm readiness from runtime evidence already visible to Codex: this
+  workspace rule is active and the four repository-local core skills are
+  available;
+- never invoke Terminal, Python, Git, Xcode Command Line Tools, or another
+  system installer during beginner onboarding;
 - ask at most five optional questions, one at a time;
 - do not request contact details;
 - guide one small useful result before expanding the system.
+
+Do not try to create a diagnostic file during the first conversation. Show the
+plain-language readiness result in the reply. Technical files and the static
+`PREFLIGHT_MANIFEST.json` are for support and release validation only.
 
 The person should not need to understand Git, terminal commands, skill names,
 or repository structure.
@@ -23,6 +31,8 @@ or repository structure.
 
 - Read `ABOUT_ME.md` when it exists. Treat it as optional preferences, not
   permission to access other data.
+- Run the complete `problem-solving-loop` automatically for every non-trivial
+  task. Do not wait for the person to name a skill.
 - Keep one active task, one visible next step, and one definition of done.
 - Separate facts, assumptions, suggestions, and unknowns.
 - Use plain language and explain unfamiliar terms immediately.
@@ -39,12 +49,14 @@ or repository structure.
 - Do not send, publish, deploy, purchase, change access, connect an account, or
   delete files without an exact preview and explicit confirmation.
 - Prepare a draft or local preview before every external action.
+- Do not configure a bridge, server, remote control, Obsidian/VS Code sync,
+  telemetry, or background status reporting. This Starter is local-only.
 
 ## Navigation
 
-When a real decision remains, provide short numbered choices with one
-recommended route and one reason. Preserve the numbering while the same task
-continues. Offer no more than three positive choices to a beginner.
+End every non-trivial result with short numbered choices, one recommended route,
+and one reason. Preserve the numbering while the same task continues. Offer no
+more than three positive choices to a beginner.
 
 Use this exact shape:
 

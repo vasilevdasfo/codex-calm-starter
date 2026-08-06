@@ -25,7 +25,8 @@ Detailed instructions: `START_HERE.md`.
 
 ## Three layers
 
-- Required core: onboarding, privacy, ProblemOS Lite, and navigation.
+- Required core: onboarding, privacy, the complete Problem Solving Loop, and
+  mandatory numbered navigation.
 - On-demand work modules: website, email, and ideas.
 - Optional support: a local preview of progress level and requested help.
 
@@ -37,6 +38,9 @@ them from `.agents/skills` after the folder is opened.
 Local `ABOUT_ME.md`, `MY_PROGRESS.md`, reports, and first results are ignored by
 Git. Nothing is sent automatically. Account connection, email sending, and
 site publishing each require separate confirmation.
+
+The Starter includes no bridge, server, remote control, Obsidian/VS Code sync,
+telemetry, or background status reporting.
 
 ## Trust and verification
 

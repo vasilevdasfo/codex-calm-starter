@@ -58,7 +58,7 @@ def main() -> int:
         run(sys.executable, "scripts/validate_starter.py", cwd=candidate)
         run(
             sys.executable,
-            ".agents/skills/onboarding-context/scripts/preflight.py",
+            "scripts/support_preflight.py",
             cwd=candidate,
         )
         technical = json.loads(
@@ -70,6 +70,22 @@ def main() -> int:
             fail("core skills were not discovered")
         if technical["checks"]["git_required_for_client"]:
             fail("Git was incorrectly required for the client")
+
+        agents_text = (candidate / "AGENTS.md").read_text(encoding="utf-8")
+        loop_text = (
+            candidate / ".agents/skills/problem-solving-loop/SKILL.md"
+        ).read_text(encoding="utf-8")
+        navigation_text = (
+            candidate / ".agents/skills/numbered-navigation/SKILL.md"
+        ).read_text(encoding="utf-8")
+        if "problem-solving-loop" not in agents_text:
+            fail("Problem Solving Loop is not routed from AGENTS.md")
+        if "Verify" not in loop_text or "Continue" not in loop_text:
+            fail("Problem Solving Loop is incomplete")
+        if "After every non-trivial answer" not in navigation_text:
+            fail("numbered navigation is not mandatory")
+        if "Do not configure a bridge" not in agents_text:
+            fail("no-bridge boundary is absent")
 
         shutil.copy(candidate / "ABOUT_ME.template.md", candidate / "ABOUT_ME.md")
         shutil.copy(
@@ -87,7 +103,7 @@ def main() -> int:
 
         run(
             sys.executable,
-            ".agents/skills/support-checkin/scripts/build_preview.py",
+            "scripts/support_build_preview.py",
             cwd=candidate,
         )
         preview = json.loads(
@@ -104,7 +120,7 @@ def main() -> int:
 
         run(
             sys.executable,
-            ".agents/skills/onboarding-context/scripts/preflight.py",
+            "scripts/support_preflight.py",
             cwd=candidate,
         )
         private_after = {
@@ -130,9 +146,20 @@ def main() -> int:
         if not private_outputs.issubset(ignored):
             fail("one or more local private artifacts are not ignored")
 
+        client_surfaces = (
+            candidate / "AGENTS.md",
+            candidate / ".agents/skills/onboarding-context/SKILL.md",
+            candidate / ".agents/skills/support-checkin/SKILL.md",
+            candidate / "START_HERE.md",
+            candidate / "НАЧАТЬ_ЗДЕСЬ.md",
+        )
+        if any("python3 " in path.read_text(encoding="utf-8") for path in client_surfaces):
+            fail("beginner path still invokes Python")
+
     print(
-        "PASS: fresh copy, preflight, core discovery, first-result evidence, "
-        "restart-safe local context, and preview-only check-in"
+        "PASS: fresh copy, complete Problem Solving Loop, mandatory numbering, "
+        "no bridge, no-Python client path, first-result evidence, restart-safe "
+        "local context, and preview-only check-in"
     )
     return 0
 

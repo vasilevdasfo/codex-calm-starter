@@ -27,3 +27,6 @@ my-first-email.md
 __pycache__/
 *.pyc
 dist/
+
+# Separate website deployment project
+site/

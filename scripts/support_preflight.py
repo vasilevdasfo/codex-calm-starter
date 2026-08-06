@@ -8,11 +8,11 @@ import os
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[1]
 CORE = {
     "onboarding-context",
     "privacy-permissions",
-    "problem-os-lite",
+    "problem-solving-loop",
     "numbered-navigation",
 }
 OPTIONAL = {"website-helper", "email-helper", "idea-helper", "support-checkin"}
@@ -70,7 +70,7 @@ def main() -> int:
         recovery.append("Не публикуйте локальные файлы профиля; обратитесь в поддержку.")
 
     technical = {
-        "starter_version": "0.2.0-local",
+        "starter_version": "0.2.0-rc4",
         "root": str(ROOT),
         "codex_detected": codex_detected,
         "checks": checks,

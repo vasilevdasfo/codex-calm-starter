@@ -50,8 +50,9 @@ Contact details and any status transmission are separate, optional actions.
 
 - `onboarding-context` — first run, short interview, and first result.
 - `privacy-permissions` — local-first boundaries and exact approval gates.
-- `problem-os-lite` — problem, bottleneck, rule, resolution, and next proof.
-- `numbered-navigation` — stable beginner-friendly choices.
+- `problem-solving-loop` — outcome, facts, boundaries, safe action, verification,
+  learning, and continuation for every non-trivial task.
+- `numbered-navigation` — mandatory stable choices after every non-trivial result.
 
 ### Layer 2 — optional work modules
 
@@ -138,6 +139,9 @@ The download page must include:
 Gmail, Calendar, Telegram, Drive, GitHub, and other accounts are not bundled.
 Connect them one at a time using the new owner's local authorization and a
 separate identity check. Never migrate tokens, cookies, sessions, or secrets.
+
+The Olya Starter does not create a bridge, server, remote control, Obsidian or
+VS Code synchronization, telemetry, or background reporting.
 
 ## Acceptance matrix
 

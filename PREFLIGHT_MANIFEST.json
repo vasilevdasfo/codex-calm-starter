@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "starter_version": "0.2.0-rc4",
+  "client_mode": "codex_file_tools_only",
+  "forbidden_client_requirements": [
+    "terminal",
+    "python",
+    "git",
+    "xcode_command_line_tools",
+    "system_installer"
+  ],
+  "required_files": [
+    "AGENTS.md",
+    "START_HERE.md",
+    "НАЧАТЬ_ЗДЕСЬ.md",
+    ".gitignore"
+  ],
+  "required_core_skills": [
+    ".agents/skills/onboarding-context/SKILL.md",
+    ".agents/skills/privacy-permissions/SKILL.md",
+    ".agents/skills/problem-solving-loop/SKILL.md",
+    ".agents/skills/numbered-navigation/SKILL.md"
+  ],
+  "optional_modules": [
+    ".agents/skills/website-helper/SKILL.md",
+    ".agents/skills/email-helper/SKILL.md",
+    ".agents/skills/idea-helper/SKILL.md",
+    ".agents/skills/support-checkin/SKILL.md"
+  ],
+  "private_files_that_must_be_ignored": [
+    "ABOUT_ME.md",
+    "MY_PROGRESS.md",
+    "CLIENT_SYNC.json",
+    ".starter_install_id",
+    "PREFLIGHT_REPORT.txt",
+    "PREFLIGHT_TECHNICAL.json"
+  ],
+  "one_recovery_action": "Снова откройте всю распакованную папку codex-calm-starter в Codex и напишите НАЧАТЬ."
+}
