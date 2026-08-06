@@ -53,6 +53,41 @@ Status values: `HAVE`, `PARTIAL`, `MISSING`, `UNVERIFIED`, `PASS`, `FAIL`.
 - Therefore the screenshots do not test v0.2 RC4 and cannot prove a defect in
   its eight repository-local skills.
 
+## Mistake-learning closure
+
+```text
+ProblemOS:
+P1 — Olya received v0.1.0 with only three old skills.
+U1 — GitHub latest, demis.world, vda.vc, and the local package named different versions.
+L1 — One release manifest owns version, archive name, exact skill set, state, and send gate.
+R1 — The build now runs the release gate before packaging and against the finished archive.
+N1 — A stale client version, floating latest link, missing core skill, or unapproved send must fail.
+```
+
+- Rule: never give a client a floating release URL or a package that differs
+  from `CLIENT_RELEASE_MANIFEST.json`.
+- Skill: the complete Problem Solving Loop and mandatory numbered navigation
+  remain part of the exact required core.
+- Pipeline: `build_release.py` reads the version from the release manifest and
+  validates both source and packed archive.
+- Check: the smoke-test injects a v0.1.0 link, removes the Problem Solving Loop,
+  and attempts an unpublished client send; all three scenarios must fail.
+
+System maintenance:
+
+- `attention_return`: prevents repeated client reinstall/debug cycles caused by
+  stale links and incomplete skill packages.
+- `maintenance_cost`: update one small manifest and run the existing build for
+  each release.
+- `retire_or_keep`: keep.
+
+## Current external gate
+
+- GitHub `releases/latest`: v0.1.0.
+- `demis.world/codex`: v0.2.0-rc1.
+- `vda.vc/codex`: v0.2.0-rc1 through the demis.world download.
+- RC4 state: `CANDIDATE_LOCAL_ONLY`; client send is blocked.
+
 ## System-learning closure
 
 - Rule: release PASS requires validating the extracted archive, including non-ASCII filenames.

@@ -3,7 +3,8 @@
 ## What is needed
 
 - Official ChatGPT desktop app with Codex: <https://chatgpt.com/download/>
-- Starter: <https://github.com/vasilevdasfo/codex-calm-starter/releases/latest>
+- Starter: use only the exact versioned URL from the approved client page.
+  Never substitute a floating `latest` link.
 - The new owner's own OpenAI account.
 
 Git, Python, and manual skill installation are not required. Python is used

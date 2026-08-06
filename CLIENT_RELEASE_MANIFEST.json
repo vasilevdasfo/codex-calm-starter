@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "product": "codex-calm-starter",
+  "version": "0.2.0-rc4",
+  "archive_name": "codex-calm-starter-v0.2.0-rc4.zip",
+  "state": "CANDIDATE_LOCAL_ONLY",
+  "client_send_allowed": false,
+  "public_release_url": null,
+  "required_core_skills": [
+    "onboarding-context",
+    "privacy-permissions",
+    "problem-solving-loop",
+    "numbered-navigation"
+  ],
+  "required_work_modules": [
+    "website-helper",
+    "email-helper",
+    "idea-helper"
+  ],
+  "required_support_skills": [
+    "support-checkin"
+  ],
+  "blocked_client_versions": [
+    "v0.1.0",
+    "v0.2.0-rc1",
+    "v0.2.0-rc2",
+    "v0.2.0-rc3"
+  ],
+  "observed_public_state": {
+    "checked_at": "2026-08-06T14:50:03-04:00",
+    "github_latest": "v0.1.0",
+    "demis_world": "v0.2.0-rc1",
+    "vda_vc": "v0.2.0-rc1"
+  },
+  "release_gate": "Clean Olya desktop smoke-test plus Dmitrii explicit approval for the exact publish and Facebook send."
+}

@@ -2,6 +2,9 @@
 
 ## v0.2.0 — unreleased
 
+- Added one client release manifest and a fail-closed distribution gate. A
+  floating GitHub `latest` link, stale package version, incomplete skill set,
+  or unapproved client send now fails verification.
 - RC4 makes first-run readiness depend on runtime rule/skill discovery and no
   longer asks a beginner session to read or create diagnostic files.
 - Added a screenshot-backed troubleshooting note for `5.6 Sol Light`; model

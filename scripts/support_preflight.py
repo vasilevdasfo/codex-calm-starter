@@ -9,6 +9,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+RELEASE = json.loads(
+    (ROOT / "CLIENT_RELEASE_MANIFEST.json").read_text(encoding="utf-8")
+)
 CORE = {
     "onboarding-context",
     "privacy-permissions",
@@ -70,7 +73,7 @@ def main() -> int:
         recovery.append("Не публикуйте локальные файлы профиля; обратитесь в поддержку.")
 
     technical = {
-        "starter_version": "0.2.0-rc4",
+        "starter_version": RELEASE["version"],
         "root": str(ROOT),
         "codex_detected": codex_detected,
         "checks": checks,

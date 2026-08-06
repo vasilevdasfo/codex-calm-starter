@@ -42,6 +42,7 @@ REQUIRED = {
     "ABOUT_ME.template.md",
     "MY_PROGRESS.template.md",
     "PREFLIGHT_MANIFEST.json",
+    "CLIENT_RELEASE_MANIFEST.json",
     "НАЧАТЬ_ЗДЕСЬ.md",
     "START_HERE.md",
     "PRIVACY.md",
@@ -52,6 +53,7 @@ REQUIRED = {
     ".gitignore",
     "scripts/support_preflight.py",
     "scripts/support_build_preview.py",
+    "scripts/check_release_gate.py",
     "scripts/smoke_test.py",
     "scripts/build_release.py",
 }

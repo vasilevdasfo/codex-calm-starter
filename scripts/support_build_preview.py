@@ -11,6 +11,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+RELEASE = json.loads(
+    (ROOT / "CLIENT_RELEASE_MANIFEST.json").read_text(encoding="utf-8")
+)
 INSTALL_ID_PATH = ROOT / ".starter_install_id"
 OUTPUT_PATH = ROOT / "CLIENT_SYNC.json"
 
@@ -50,7 +53,7 @@ def main() -> int:
         "destination": "UNCONFIGURED",
         "consent_to_send": False,
         "installation_id": installation_id(),
-        "starter_version": "0.2.0-rc4",
+        "starter_version": RELEASE["version"],
         "language": "unknown",
         "operating_system": platform.system() or "unknown",
         "onboarding_level": level,

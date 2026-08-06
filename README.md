@@ -5,7 +5,8 @@ English · [Русский](README.ru.md)
 A calm Codex start for a person with no technical background. The starter
 contains no other person's chats, accounts, memory, keys, or filled profile.
 
-**[Download the current public release](https://github.com/vasilevdasfo/codex-calm-starter/releases/latest)**
+**Release status:** this source is a locally verified candidate. Client download
+remains blocked until the exact public asset is verified and approved.
 
 ## Simplest start
 

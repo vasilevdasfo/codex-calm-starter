@@ -3,7 +3,8 @@
 ## Что нужно
 
 - Официальное приложение ChatGPT с Codex: <https://chatgpt.com/download/>
-- Starter: <https://github.com/vasilevdasfo/codex-calm-starter/releases/latest>
+- Starter: используйте только точную версионную ссылку с одобренной клиентской
+  страницы. Не заменяйте её плавающей ссылкой `latest`.
 - Собственный аккаунт OpenAI.
 
 Не нужно устанавливать Git, Python, Xcode Command Line Tools или дополнительные

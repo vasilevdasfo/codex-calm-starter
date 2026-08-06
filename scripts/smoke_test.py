@@ -156,10 +156,68 @@ def main() -> int:
         if any("python3 " in path.read_text(encoding="utf-8") for path in client_surfaces):
             fail("beginner path still invokes Python")
 
+        release_gate = run(
+            sys.executable,
+            "scripts/check_release_gate.py",
+            cwd=candidate,
+        )
+        if "PASS: one release manifest" not in release_gate.stdout:
+            fail("release gate did not confirm the canonical manifest")
+
+        send_attempt = subprocess.run(
+            (
+                sys.executable,
+                "scripts/check_release_gate.py",
+                "--for-client-send",
+            ),
+            cwd=candidate,
+            text=True,
+            capture_output=True,
+        )
+        if send_attempt.returncode == 0:
+            fail("unpublished candidate was incorrectly allowed for client send")
+        if "client distribution is blocked" not in send_attempt.stdout:
+            fail("client-send failure did not explain the exact release gate")
+
+        readme_ru = candidate / "README.ru.md"
+        clean_readme = readme_ru.read_text(encoding="utf-8")
+        readme_ru.write_text(
+            clean_readme
+            + "\nhttps://github.com/example/project/releases/tag/v0.1.0\n",
+            encoding="utf-8",
+        )
+        stale_attempt = subprocess.run(
+            (sys.executable, "scripts/check_release_gate.py"),
+            cwd=candidate,
+            text=True,
+            capture_output=True,
+        )
+        if stale_attempt.returncode == 0:
+            fail("stale v0.1.0 client link was not rejected")
+        if "stale client version v0.1.0" not in stale_attempt.stdout:
+            fail("stale-link failure did not identify the blocked version")
+        readme_ru.write_text(clean_readme, encoding="utf-8")
+
+        loop_path = candidate / ".agents/skills/problem-solving-loop/SKILL.md"
+        loop_backup = loop_path.read_text(encoding="utf-8")
+        loop_path.unlink()
+        incomplete_attempt = subprocess.run(
+            (sys.executable, "scripts/check_release_gate.py"),
+            cwd=candidate,
+            text=True,
+            capture_output=True,
+        )
+        if incomplete_attempt.returncode == 0:
+            fail("incomplete core skill set was not rejected")
+        if "release skill set mismatch" not in incomplete_attempt.stdout:
+            fail("incomplete-core failure did not identify the skill mismatch")
+        loop_path.parent.mkdir(parents=True, exist_ok=True)
+        loop_path.write_text(loop_backup, encoding="utf-8")
+
     print(
         "PASS: fresh copy, complete Problem Solving Loop, mandatory numbering, "
         "no bridge, no-Python client path, first-result evidence, restart-safe "
-        "local context, and preview-only check-in"
+        "local context, preview-only check-in, and stale-release rejection"
     )
     return 0
 

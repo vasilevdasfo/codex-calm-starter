@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import subprocess
 import sys
 import tempfile
@@ -13,8 +14,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
-VERSION = "0.2.0-rc4"
-ARCHIVE = DIST / f"codex-calm-starter-v{VERSION}.zip"
+RELEASE_MANIFEST = json.loads(
+    (ROOT / "CLIENT_RELEASE_MANIFEST.json").read_text(encoding="utf-8")
+)
+VERSION = RELEASE_MANIFEST["version"]
+ARCHIVE = DIST / RELEASE_MANIFEST["archive_name"]
 PREFIX = "codex-calm-starter/"
 
 
@@ -40,6 +44,7 @@ def public_files() -> list[Path]:
 
 
 def main() -> int:
+    run(sys.executable, "scripts/check_release_gate.py")
     run(sys.executable, "scripts/validate_starter.py")
     run(sys.executable, "scripts/smoke_test.py")
     DIST.mkdir(exist_ok=True)
@@ -60,6 +65,12 @@ def main() -> int:
             cwd=extracted,
             check=True,
         )
+    run(
+        sys.executable,
+        "scripts/check_release_gate.py",
+        "--archive",
+        str(ARCHIVE),
+    )
     checksum = hashlib.sha256(ARCHIVE.read_bytes()).hexdigest()
     checksum_path = ARCHIVE.with_suffix(".zip.sha256")
     checksum_path.write_text(f"{checksum}  {ARCHIVE.name}\n", encoding="utf-8")
