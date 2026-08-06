@@ -7,6 +7,8 @@ import argparse
 import hashlib
 import json
 import sys
+import urllib.error
+import urllib.request
 import zipfile
 from pathlib import Path
 
@@ -85,6 +87,7 @@ def check_source(root: Path, manifest: dict, for_client_send: bool) -> None:
     state = manifest.get("state")
     allowed = manifest.get("client_send_allowed")
     public_url = manifest.get("public_release_url")
+    public_asset_url = manifest.get("public_asset_url")
     if state == "CANDIDATE_LOCAL_ONLY":
         if allowed is not False or public_url is not None:
             fail("local candidate must have send=false and public_release_url=null")
@@ -93,16 +96,26 @@ def check_source(root: Path, manifest: dict, for_client_send: bool) -> None:
             fail("public verified state must explicitly allow client send")
         if not isinstance(public_url, str) or version not in public_url:
             fail("public verified URL must contain the exact manifest version")
+        if (
+            not isinstance(public_asset_url, str)
+            or version not in public_asset_url
+            or archive_name not in public_asset_url
+        ):
+            fail("public asset URL must contain the exact version and archive name")
     else:
         fail(f"unknown release state: {state}")
 
-    if for_client_send and not (
-        state == "PUBLIC_VERIFIED" and allowed is True and public_url
-    ):
-        fail(
-            "client distribution is blocked: exact public release and approval "
-            "are not verified"
-        )
+    if for_client_send:
+        if not (
+            state == "PUBLIC_VERIFIED"
+            and allowed is True
+            and public_url
+            and public_asset_url
+        ):
+            fail(
+                "client distribution is blocked: exact public release and "
+                "approval are not verified"
+            )
 
 
 def check_archive(archive: Path, manifest: dict) -> str:
@@ -143,9 +156,29 @@ def main() -> int:
     root = Path(args.root).resolve() if args.root else Path(__file__).resolve().parents[1]
     manifest = load_manifest(root)
     check_source(root, manifest, args.for_client_send)
+    local_checksum = ""
     if args.archive:
-        checksum = check_archive(Path(args.archive).resolve(), manifest)
-        print(f"ARCHIVE_SHA256: {checksum}")
+        local_checksum = check_archive(Path(args.archive).resolve(), manifest)
+        print(f"ARCHIVE_SHA256: {local_checksum}")
+    if args.for_client_send:
+        if not args.archive:
+            fail("client-send verification requires the exact local archive")
+        try:
+            request = urllib.request.Request(
+                manifest["public_asset_url"],
+                headers={"User-Agent": "codex-calm-release-gate/1"},
+            )
+            with urllib.request.urlopen(request, timeout=30) as response:
+                public_bytes = response.read()
+        except (OSError, urllib.error.URLError) as exc:
+            fail(f"public asset readback failed: {exc}")
+        public_checksum = hashlib.sha256(public_bytes).hexdigest()
+        if public_checksum != local_checksum:
+            fail(
+                "public asset checksum differs from the verified local archive: "
+                f"{public_checksum}"
+            )
+        print(f"PUBLIC_ASSET_SHA256: {public_checksum}")
     print(
         "PASS: one release manifest, exact skill set, no stale client links, "
         f"state={manifest['state']}"

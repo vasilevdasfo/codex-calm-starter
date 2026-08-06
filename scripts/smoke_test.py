@@ -164,6 +164,17 @@ def main() -> int:
         if "PASS: one release manifest" not in release_gate.stdout:
             fail("release gate did not confirm the canonical manifest")
 
+        release_manifest_path = candidate / "CLIENT_RELEASE_MANIFEST.json"
+        release_manifest_text = release_manifest_path.read_text(encoding="utf-8")
+        release_manifest = json.loads(release_manifest_text)
+        release_manifest["state"] = "CANDIDATE_LOCAL_ONLY"
+        release_manifest["client_send_allowed"] = False
+        release_manifest["public_release_url"] = None
+        release_manifest["public_asset_url"] = None
+        release_manifest_path.write_text(
+            json.dumps(release_manifest, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
         send_attempt = subprocess.run(
             (
                 sys.executable,
@@ -178,6 +189,10 @@ def main() -> int:
             fail("unpublished candidate was incorrectly allowed for client send")
         if "client distribution is blocked" not in send_attempt.stdout:
             fail("client-send failure did not explain the exact release gate")
+        release_manifest_path.write_text(
+            release_manifest_text,
+            encoding="utf-8",
+        )
 
         readme_ru = candidate / "README.ru.md"
         clean_readme = readme_ru.read_text(encoding="utf-8")

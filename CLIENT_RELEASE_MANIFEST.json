@@ -3,9 +3,10 @@
   "product": "codex-calm-starter",
   "version": "0.2.0-rc4",
   "archive_name": "codex-calm-starter-v0.2.0-rc4.zip",
-  "state": "CANDIDATE_LOCAL_ONLY",
-  "client_send_allowed": false,
-  "public_release_url": null,
+  "state": "PUBLIC_VERIFIED",
+  "client_send_allowed": true,
+  "public_release_url": "https://github.com/vasilevdasfo/codex-calm-starter/releases/tag/v0.2.0-rc4",
+  "public_asset_url": "https://github.com/vasilevdasfo/codex-calm-starter/releases/download/v0.2.0-rc4/codex-calm-starter-v0.2.0-rc4.zip",
   "required_core_skills": [
     "onboarding-context",
     "privacy-permissions",
@@ -32,5 +33,5 @@
     "demis_world": "v0.2.0-rc1",
     "vda_vc": "v0.2.0-rc1"
   },
-  "release_gate": "Clean Olya desktop smoke-test plus Dmitrii explicit approval for the exact publish and Facebook send."
+  "release_gate": "Dmitrii approved route 19. Client send still requires live asset checksum verification and public page readback."
 }

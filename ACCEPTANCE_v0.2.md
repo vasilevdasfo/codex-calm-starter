@@ -86,7 +86,9 @@ System maintenance:
 - GitHub `releases/latest`: v0.1.0.
 - `demis.world/codex`: v0.2.0-rc1.
 - `vda.vc/codex`: v0.2.0-rc1 through the demis.world download.
-- RC4 state: `CANDIDATE_LOCAL_ONLY`; client send is blocked.
+- Route 19 approved: RC4 is promoted to the exact versioned public-release
+  transaction. Client send remains blocked until the live asset checksum and
+  both public page readbacks pass.
 
 ## System-learning closure
 
