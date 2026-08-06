@@ -6,6 +6,8 @@ A minimal, privacy-first workspace for a calm first experience with Codex.
 It contains no personal profile, chat history, credentials, accounts, or
 private project data.
 
+**[Download Codex Calm Starter v0.1.0 (ZIP)](https://github.com/vasilevdasfo/codex-calm-starter/releases/download/v0.1.0/codex-calm-starter-v0.1.0.zip)**
+
 ## Quick start
 
 1. Download the official ChatGPT desktop app with Codex:

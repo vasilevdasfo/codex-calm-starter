@@ -5,6 +5,8 @@
 Минимальное спокойное рабочее пространство для первого знакомства с Codex.
 В репозитории нет чужих чатов, ключей, аккаунтов, задач или личного профиля.
 
+**[Скачать Codex Calm Starter v0.1.0 (ZIP)](https://github.com/vasilevdasfo/codex-calm-starter/releases/download/v0.1.0/codex-calm-starter-v0.1.0.zip)**
+
 ## Быстрый старт
 
 1. Скачайте официальное приложение ChatGPT с Codex:
