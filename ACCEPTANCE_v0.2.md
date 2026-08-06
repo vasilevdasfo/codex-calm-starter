@@ -19,7 +19,7 @@ Status values: `HAVE`, `PARTIAL`, `MISSING`, `UNVERIFIED`, `PASS`, `FAIL`.
 
 ## Current target computer
 
-- Owner: `UNKNOWN`
+- Owner: `Оля Проскурякова`
 - Operating system: `UNKNOWN`
 - Device model: `UNKNOWN`
 
@@ -81,14 +81,22 @@ System maintenance:
   each release.
 - `retire_or_keep`: keep.
 
-## Current external gate
+## External rollout result
 
-- GitHub `releases/latest`: v0.1.0.
-- `demis.world/codex`: v0.2.0-rc1.
-- `vda.vc/codex`: v0.2.0-rc1 through the demis.world download.
-- Route 19 approved: RC4 is promoted to the exact versioned public-release
-  transaction. Client send remains blocked until the live asset checksum and
-  both public page readbacks pass.
+| External checkpoint | Result | Evidence / remaining gate |
+|---|---|---|
+| GitHub RC4 release | PASS | The exact versioned RC4 release and ZIP asset are public. A fresh download matched SHA-256 `ed484ae8019748606c7271c4b2ea03efc45b39a378408f79f60ee1e361978ded` and passed the client-send release gate. |
+| Starter guide site | PASS | The saved Sites version is deployed and links to the exact GitHub RC4 asset and checksum. |
+| `demis.world/codex` | PASS | Production readback contains the RC4 filename and checksum. The public ZIP downloaded as a valid archive and matched the release checksum. |
+| `vda.vc/codex` | PASS | Production readback contains the RC4 filename, exact checksum, and the verified `demis.world` asset URL. |
+| Facebook instruction to Olya | PASS | One message was sent in the conversation headed `Оля Проскурякова`; post-send readback found the exact message and Facebook's sent confirmation. |
+| Olya installs RC4 | UNVERIFIED | A public download or an outgoing Facebook message is not proof of installation. |
+| Olya completes first run | UNVERIFIED | Requires a new screenshot showing the extracted RC4 project opened in official Codex after `НАЧАТЬ`. |
+| Olya receives first useful result | UNVERIFIED | Requires a visible artifact from her own computer; no inference is made from download, send, or online status. |
+
+Post-release evidence was added to `main` after the immutable RC4 release
+artifact was built. The published ZIP and tag remain unchanged so their
+verified checksum stays stable.
 
 ## System-learning closure
 
