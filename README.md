@@ -2,64 +2,53 @@
 
 English · [Русский](README.ru.md)
 
-A minimal, privacy-first workspace for a calm first experience with Codex.
-It contains no personal profile, chat history, credentials, accounts, or
-private project data.
+A calm Codex start for a person with no technical background. The starter
+contains no other person's chats, accounts, memory, keys, or filled profile.
 
-**[Download Codex Calm Starter v0.1.0 (ZIP)](https://github.com/vasilevdasfo/codex-calm-starter/releases/download/v0.1.0/codex-calm-starter-v0.1.0.zip)**
+**[Download the current public release](https://github.com/vasilevdasfo/codex-calm-starter/releases/latest)**
 
-## Quick start
+## Simplest start
 
-1. Download the official ChatGPT desktop app with Codex:
-   <https://chatgpt.com/download/>
-2. Sign in with your own OpenAI account.
-3. On GitHub, select **Code → Download ZIP**, then extract the archive.
-4. Create your private local profile:
+- Install the official ChatGPT desktop app with Codex:
+  <https://chatgpt.com/download/>
+- Extract the Starter and open the entire folder in Codex.
+- Type: `START`.
 
-   - No terminal: duplicate `ABOUT_ME.template.md` and rename the copy to
-     `ABOUT_ME.md`.
-   - macOS/Linux: `cp ABOUT_ME.template.md ABOUT_ME.md`
-   - Windows PowerShell: `Copy-Item ABOUT_ME.template.md ABOUT_ME.md`
+Detailed instructions: `START_HERE.md`.
 
-5. Open the extracted folder as a local project in Codex.
-6. Send this first prompt:
+## What happens
 
-   `Read AGENTS.md and ABOUT_ME.md. Do not send anything or change anything outside this folder. Help me choose one small task for today.`
+- a plain-language local setup check;
+- no more than five short optional questions;
+- one useful task and one visible result;
+- clear numbered choices for what to do next.
 
-## What is included
+## Three layers
 
-- `AGENTS.md` — calm working rules and exact confirmation before external actions.
-- `ABOUT_ME.template.md` — an optional preferences and work-rhythm questionnaire.
-- `.agents/skills/` — three project skills Codex discovers in this repository.
-- `PRIVACY.md` — boundaries for personal context.
-- `scripts/validate_starter.py` — a local structure and secret-pattern check.
+- Required core: onboarding, privacy, ProblemOS Lite, and navigation.
+- On-demand work modules: website, email, and ideas.
+- Optional support: a local preview of progress level and requested help.
 
-## Privacy rule
+The person does not need to select or install skills manually. Codex discovers
+them from `.agents/skills` after the folder is opened.
 
-The filled `ABOUT_ME.md` is ignored by Git. Do not rename it or publish the
-completed file. Do not add passwords, login codes, identity documents, banking
-details, private keys, or another person's private messages.
+## Privacy
 
-## Optional validation
+Local `ABOUT_ME.md`, `MY_PROGRESS.md`, reports, and first results are ignored by
+Git. Nothing is sent automatically. Account connection, email sending, and
+site publishing each require separate confirmation.
 
-If Python 3 is already installed, run:
+## Trust and verification
+
+- [Source on GitHub](https://github.com/vasilevdasfo/codex-calm-starter)
+- [Public releases](https://github.com/vasilevdasfo/codex-calm-starter/releases)
+- Every new ZIP receives a SHA-256 checksum.
+- Contributors are named only with a verified role and consent.
+
+## Support validation
+
+If Python 3 is available:
 
 `python3 scripts/validate_starter.py`
 
-Expected output: `PASS: starter kit is complete and public-safe`.
-
-## Why repository skills
-
-Codex officially discovers repository-specific skills in `.agents/skills` and
-repository instructions in `AGENTS.md`. That means no global configuration or
-home-directory copying is required: download, create the private profile, and
-open the folder.
-
-Official references:
-
-- [Download ChatGPT with Codex](https://chatgpt.com/download/)
-- [Codex customization and skills](https://learn.chatgpt.com/docs/customization/overview#skills)
-
-## License
-
-MIT. Use, adapt, and redistribute with the license included.
+The expected result starts with `PASS`.

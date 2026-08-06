@@ -1,5 +1,13 @@
 # Private local profile
 ABOUT_ME.md
+MY_PROGRESS.md
+CLIENT_SYNC.json
+.starter_install_id
+PREFLIGHT_REPORT.txt
+PREFLIGHT_TECHNICAL.json
+FIRST_RESULT.md
+my-first-site/
+my-first-email.md
 
 # Local environment and editor state
 .env
@@ -16,3 +24,6 @@ ABOUT_ME.md
 
 # Local Codex state must never be committed
 .codex/
+__pycache__/
+*.pyc
+dist/
