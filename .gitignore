@@ -1,0 +1,18 @@
+# Private local profile
+ABOUT_ME.md
+
+# Local environment and editor state
+.env
+.env.*
+.DS_Store
+.vscode/
+.idea/
+
+# Credentials and keys
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Local Codex state must never be committed
+.codex/
