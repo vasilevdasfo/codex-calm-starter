@@ -5,8 +5,10 @@ English · [Русский](README.ru.md)
 A calm Codex start for a person with no technical background. The starter
 contains no other person's chats, accounts, memory, keys, or filled profile.
 
-**Release status:** this source is a locally verified candidate. Client download
-remains blocked until the exact public asset is verified and approved.
+**Release status:** [v0.2.0-rc4](https://github.com/vasilevdasfo/codex-calm-starter/releases/tag/v0.2.0-rc4)
+is the current public verified client package. Earlier client versions are
+blocked by the release gate. The tracked source passes the local validation
+and smoke tests below; verify the published ZIP checksum before delivery.
 
 ## Simplest start
 
@@ -57,3 +59,17 @@ If Python 3 is available:
 `python3 scripts/validate_starter.py`
 
 The expected result starts with `PASS`.
+
+## Use it, test it, improve it
+
+The starter and its public skills are meant to be used and reviewed. In
+particular, try the Problem Solving Loop / ProblemOS on a real, bounded task.
+
+- Report a bug or propose a concrete improvement in
+  [Issues](https://github.com/vasilevdasfo/codex-calm-starter/issues).
+- Share a usage example or discuss a method in
+  [Discussions](https://github.com/vasilevdasfo/codex-calm-starter/discussions).
+- For code or documentation changes, read [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+Please use anonymized examples and never attach passwords, tokens, private
+chats, client data, or other material you are not allowed to publish.
